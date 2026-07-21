@@ -1,0 +1,82 @@
+const TEXTS = {
+  ru: {
+    choose_lang:     '🌐 Выберите язык / Забонро интихоб кунед:',
+    lang_set:        '✅ Язык установлен: Русский',
+    main_menu:       '🏠 Главное меню',
+    btn_diamonds:    '💎 Алмазы',
+    btn_profile:     '👤 Мой профиль',
+    btn_history:     '📋 История покупок',
+    btn_support:     '🆘 Служба поддержки',
+    btn_lang:        '🌐 Сменить язык',
+    enter_id:        '🔥 Введите ваш ID аккаунта Free Fire:\n\nНапример: <code>708957035</code>',
+    checking_id:     '⏳ Проверяем аккаунт...',
+    id_not_found:    '❌ Аккаунт не найден. Проверьте ID и попробуйте снова.',
+    confirm_account: '✅ Аккаунт найден!\n\n👤 Имя: <b>{name}</b>\n🆔 ID: <code>{id}</code>\n\nВыберите пакет:',
+    btn_confirm:     '✅ Верно, выбрать пакет',
+    btn_wrong_id:    '❌ Неверный ID',
+    choose_package:  '💎 Выберите пакет алмазов:',
+    package_info:    '📦 Вы выбрали:\n\n💎 <b>{name}</b>\n💰 Цена: <b>{price} сомони</b>\n\n⚠️ Бонус можно получить только при первой покупке.',
+    payment_info:    '💳 Оплатите на карту:\n\n<b>Номер карты:</b> <code>{card}</code>\n<b>Владелец:</b> {owner}\n<b>Сумма:</b> <b>{price} сомони</b>\n\n📸 После оплаты отправьте скриншот чека.',
+    btn_pay_dc:      '💳 Перейти к оплате (DC Next)',
+    btn_back:        '◀️ Назад',
+    btn_main_menu:   '🏠 Главное меню',
+    send_screenshot: '📸 Отправьте скриншот оплаты:',
+    order_accepted:  '✅ Ваш заказ принят!\n\n🆔 Заказ №{order_id}\n👤 Аккаунт: <b>{ff_name}</b>\n💎 Пакет: <b>{package}</b>\n💰 Сумма: <b>{price} сомони</b>\n\n⏳ Вы в очереди: <b>{queue}</b>-й\n\nМы проверим оплату и зачислим алмазы в ближайшее время.',
+    no_orders:       '📋 У вас пока нет покупок.',
+    order_history:   '📋 <b>История покупок:</b>\n\n',
+    order_item:      '🔹 №{id} | {package} | {price} сом | {status} | {date}\n',
+    status_pending:  '⏳ Ожидает',
+    status_done:     '✅ Выполнен',
+    status_rejected: '❌ Отклонён',
+    support_text:    '🆘 <b>Служба поддержки</b>\n\nЕсли у вас есть вопросы, напишите нам:\n👤 @jovidxon_dev\n\n⏰ Время работы: 09:00 - 22:00',
+    profile_text:    '👤 <b>Мой профиль</b>\n\n🆔 Telegram ID: <code>{tg_id}</code>\n👤 Имя: {name}\n📦 Всего покупок: {orders}',
+    wrong_format:    '❌ Отправьте изображение (скриншот оплаты).',
+    order_done:      '✅ <b>Заказ №{order_id} выполнен!</b>\n\n💎 <b>{package}</b> алмазы зачислены на аккаунт\n👤 <b>{ff_name}</b> (ID: <code>{ff_id}</code>)\n\nСпасибо за покупку! 🎮🔥',
+    order_rejected:  '❌ <b>Заказ №{order_id} отклонён.</b>\n\nЕсли это ошибка, напишите нам:\n👤 @jovidxon_dev',
+  },
+  tj: {
+    choose_lang:     '🌐 Забонро интихоб кунед / Выберите язык:',
+    lang_set:        '✅ Забон танзим шуд: Тоҷикӣ',
+    main_menu:       '🏠 Менюи асосӣ',
+    btn_diamonds:    '💎 Алмос',
+    btn_profile:     '👤 Профили ман',
+    btn_history:     '📋 Таърихи харидҳо',
+    btn_support:     '🆘 Хидмати дастгирӣ',
+    btn_lang:        '🌐 Забонро иваз кунед',
+    enter_id:        '🔥 ID-и аккаунти Free Fire-атонро ворид кунед:\n\nМасалан: <code>708957035</code>',
+    checking_id:     '⏳ Аккаунт тафтиш карда мешавад...',
+    id_not_found:    '❌ Аккаунт ёфт нашуд. ID-ро тафтиш кунед ва дубора кӯшиш кунед.',
+    confirm_account: '✅ Аккаунт ёфт шуд!\n\n👤 Ном: <b>{name}</b>\n🆔 ID: <code>{id}</code>\n\nПакетро интихоб кунед:',
+    btn_confirm:     '✅ Дуруст аст, пакет интихоб кунам',
+    btn_wrong_id:    '❌ ID нодуруст',
+    choose_package:  '💎 Пакети алмосро интихоб кунед:',
+    package_info:    '📦 Шумо интихоб кардед:\n\n💎 <b>{name}</b>\n💰 Нарх: <b>{price} сомонӣ</b>\n\n⚠️ Бонусро танҳо бори аввал гирифтан мумкин аст.',
+    payment_info:    '💳 Ба корта пардохт кунед:\n\n<b>Рақами корта:</b> <code>{card}</code>\n<b>Соҳиб:</b> {owner}\n<b>Маблағ:</b> <b>{price} сомонӣ</b>\n\n📸 Пас аз пардохт скриншоти чекро фиристед.',
+    btn_pay_dc:      '💳 Ба пардохт гузаред (DC Next)',
+    btn_back:        '◀️ Бозгашт',
+    btn_main_menu:   '🏠 Менюи асосӣ',
+    send_screenshot: '📸 Скриншоти пардохтро фиристед:',
+    order_accepted:  '✅ Фармоиши шумо қабул шуд!\n\n🆔 Фармоиш №{order_id}\n👤 Аккаунт: <b>{ff_name}</b>\n💎 Пакет: <b>{package}</b>\n💰 Маблағ: <b>{price} сомонӣ</b>\n\n⏳ Шумо дар навбат: <b>{queue}</b>-ум\n\nМо пардохтро тафтиш мекунем ва алмосро зуд мефиристем.',
+    no_orders:       '📋 Шумо ҳоло харидорӣ надоред.',
+    order_history:   '📋 <b>Таърихи харидҳо:</b>\n\n',
+    order_item:      '🔹 №{id} | {package} | {price} сом | {status} | {date}\n',
+    status_pending:  '⏳ Интизор',
+    status_done:     '✅ Иҷро шуд',
+    status_rejected: '❌ Рад шуд',
+    support_text:    '🆘 <b>Хидмати дастгирӣ</b>\n\nАгар саволе дошта бошед, ба мо нависед:\n👤 @jovidxon_dev\n\n⏰ Вақти кор: 09:00 - 22:00',
+    profile_text:    '👤 <b>Профили ман</b>\n\n🆔 Telegram ID: <code>{tg_id}</code>\n👤 Ном: {name}\n📦 Ҳамаи харидҳо: {orders}',
+    wrong_format:    '❌ Тасвир (скриншоти пардохт) фиристед.',
+    order_done:      '✅ <b>Фармоиши №{order_id} иҷро шуд!</b>\n\n💎 <b>{package}</b> алмосҳо ба аккаунти\n👤 <b>{ff_name}</b> (ID: <code>{ff_id}</code>)\nзачисленд. Бозӣ кунед! 🎮🔥',
+    order_rejected:  '❌ <b>Фармоиши №{order_id} рад шуд.</b>\n\nАгар хато бошад, бо мо тамос гиред:\n👤 @jovidxon_dev',
+  }
+}
+
+function t(lang, key, vars = {}) {
+  let text = (TEXTS[lang] || TEXTS.ru)[key] || key
+  for (const [k, v] of Object.entries(vars)) {
+    text = text.replaceAll(`{${k}}`, v)
+  }
+  return text
+}
+
+module.exports = { t }
