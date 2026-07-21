@@ -52,7 +52,7 @@ async function checkFFAccount(playerId) {
     return null;
   }
 }
-    )
+    
     
     // Агар ҷавоб бо муваффақият баргардад ва ном мавҷуд бошад
     if (res.data && res.data.nickname) {
