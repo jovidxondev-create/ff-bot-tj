@@ -24,6 +24,7 @@ bot.use((ctx, next) => {
 
 // ─── FF ACCOUNT TEKSHIRISH ────────────────────────────
 // Ҳатман калимаи "async" бояд дар аввал бошад:
+// ─── FF ACCOUNT TEKSHIRISH ────────────────────────────
 async function checkFFAccount(playerId) {
   try {
     const res = await axios.post(
@@ -45,13 +46,23 @@ async function checkFFAccount(playerId) {
     if (res.data && res.data.nickname) {
         return res.data.nickname;
     }
-    
-    return null;
   } catch (error) {
     console.error('API Error (kzshop):', error.message);
-    return null;
   }
+
+  // Garena API ni ham sinab ko'ramiz (эҳтиётӣ)
+  try {
+    const res = await axios.post(
+      'https://shop.garena.my/api/auth/player_id_login',
+      `player_id=${playerId}&app_id=100067&app_type=`,
+      { headers: { 'Content-Type': 'application/x-www-form-urlencoded' }, timeout: 6000 }
+    )
+    if (res.data && res.data.username) return res.data.username
+  } catch {}
+  
+  return null;
 }
+
     
     
     // Агар ҷавоб бо муваффақият баргардад ва ном мавҷуд бошад
