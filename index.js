@@ -22,20 +22,36 @@ bot.use((ctx, next) => {
   return next()
 })
 
-// ─── FF NICKNAME TEKSHIRISH ──────────────────────────
+// ─── FF ACCOUNT TEKSHIRISH (Навсозӣ шуд бо kzshop) ────────────────────────────
 async function checkFFAccount(playerId) {
-  const regions = ['IND', 'SG', 'BD', 'ID', 'TH', 'MY', 'VN', 'PK']
-  for (const region of regions) {
-    try {
-      const res = await axios.get(
-        `https://www.hlgamingofficial.com/api/ff/?uid=${playerId}&region=${region}`,
-        { timeout: 6000 }
-      )
-      if (res.data && res.data.nickname && !res.data.nickname.startsWith('Player_')) {
-        return res.data.nickname
+  try {
+    const res = await axios.post(
+      'https://kzshop.garena.com/api/auth/player_id_login',
+      {
+        app_id: 100067, // App ID барои Free Fire
+        login_id: playerId.toString(),
+        app_server_id: 0
+      },
+      {
+        headers: {
+          'Content-Type': 'application/json',
+          'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36'
+        },
+        timeout: 8000
       }
-    } catch {}
+    )
+    
+    // Агар ҷавоб бо муваффақият баргардад ва ном мавҷуд бошад
+    if (res.data && res.data.nickname) {
+        return res.data.nickname;
+    }
+    
+    return null;
+  } catch (error) {
+    console.error('API Error (kzshop):', error.message);
+    return null;
   }
+}
   // Garena API ni ham sinab ko'ramiz
   try {
     const res = await axios.post(
