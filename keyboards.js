@@ -10,10 +10,14 @@ const langKeyboard = () => Markup.inlineKeyboard([
 
 const mainMenuKeyboard = (lang) => Markup.inlineKeyboard([
   [Markup.button.callback(t(lang, 'btn_diamonds'),  'buy_diamonds')],
-  [Markup.button.callback(t(lang, 'btn_profile'),   'my_profile')],
-  [Markup.button.callback(t(lang, 'btn_history'),   'history')],
-  [Markup.button.callback(t(lang, 'btn_support'),   'support')],
-  [Markup.button.callback(t(lang, 'btn_lang'),      'change_lang')]
+  [
+    Markup.button.callback(t(lang, 'btn_profile'),   'my_profile'),
+    Markup.button.callback(t(lang, 'btn_history'),   'history')
+  ],
+  [
+    Markup.button.callback(t(lang, 'btn_support'),   'support'),
+    Markup.button.callback(t(lang, 'btn_lang'),      'change_lang')
+  ]
 ])
 
 const confirmAccountKeyboard = (lang) => Markup.inlineKeyboard([
@@ -25,7 +29,8 @@ const confirmAccountKeyboard = (lang) => Markup.inlineKeyboard([
 const packagesKeyboard = (lang, packages) => {
   const buttons = packages.map(pkg => {
     const name = lang === 'ru' ? pkg.name_ru : pkg.name_tj
-    return [Markup.button.callback(`${name} — ${pkg.price} сом`, `pkg_${pkg.id}`)]
+    // Тугмаҳоро дар як қатор мемонем, то намуди зебо дошта бошанд
+    return [Markup.button.callback(`💎 ${name} ➖ 💰 ${pkg.price} сом`, `pkg_${pkg.id}`)]
   })
   buttons.push([Markup.button.callback(t(lang, 'btn_back'), 'main_menu')])
   return Markup.inlineKeyboard(buttons)
@@ -33,8 +38,10 @@ const packagesKeyboard = (lang, packages) => {
 
 const paymentKeyboard = (lang) => Markup.inlineKeyboard([
   [Markup.button.url(t(lang, 'btn_pay_dc'), 'https://dcnext.tj')],
-  [Markup.button.callback(t(lang, 'btn_back'),      'buy_diamonds')],
-  [Markup.button.callback(t(lang, 'btn_main_menu'), 'main_menu')]
+  [
+    Markup.button.callback(t(lang, 'btn_back'),      'buy_diamonds'),
+    Markup.button.callback(t(lang, 'btn_main_menu'), 'main_menu')
+  ]
 ])
 
 const backKeyboard = (lang) => Markup.inlineKeyboard([
@@ -43,8 +50,8 @@ const backKeyboard = (lang) => Markup.inlineKeyboard([
 
 const adminOrderKeyboard = (orderId, userId) => Markup.inlineKeyboard([
   [
-    Markup.button.callback('✅ Тасдиқ', `adm_done_${orderId}_${userId}`),
-    Markup.button.callback('❌ Рад кунед', `adm_reject_${orderId}_${userId}`)
+    Markup.button.callback('✅ Тасдиқ кардан', `adm_done_${orderId}_${userId}`),
+    Markup.button.callback('❌ Рад кардан', `adm_reject_${orderId}_${userId}`)
   ]
 ])
 
