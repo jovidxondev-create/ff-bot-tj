@@ -22,13 +22,14 @@ bot.use((ctx, next) => {
   return next()
 })
 
-// ─── FF ACCOUNT TEKSHIRISH (Навсозӣ шуд бо kzshop) ────────────────────────────
+// ─── FF ACCOUNT TEKSHIRISH ────────────────────────────
+// Ҳатман калимаи "async" бояд дар аввал бошад:
 async function checkFFAccount(playerId) {
   try {
     const res = await axios.post(
       'https://kzshop.garena.com/api/auth/player_id_login',
       {
-        app_id: 100067, // App ID барои Free Fire
+        app_id: 100067,
         login_id: playerId.toString(),
         app_server_id: 0
       },
@@ -39,6 +40,18 @@ async function checkFFAccount(playerId) {
         },
         timeout: 8000
       }
+    );
+    
+    if (res.data && res.data.nickname) {
+        return res.data.nickname;
+    }
+    
+    return null;
+  } catch (error) {
+    console.error('API Error (kzshop):', error.message);
+    return null;
+  }
+}
     )
     
     // Агар ҷавоб бо муваффақият баргардад ва ном мавҷуд бошад
