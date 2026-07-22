@@ -187,17 +187,22 @@ bot.on('text', async (ctx) => {
         [{ text: '🔴 Сухбатро бастан', callback_data: `close_chat_${u.id}` }]
       ]
     }
-    // Асосий ботга
     for (const adminId of ADMIN_IDS) {
       await bot.telegram.sendMessage(adminId, adminText, { parse_mode: 'HTML', reply_markup: adminKb }).catch(() => {})
     }
-    // Admin ботга ҳам
     await sendToAdminBot(adminText, adminKb)
+
+    const userKb = Markup.inlineKeyboard([
+      [Markup.button.callback(lang === 'tj' ? '🔴 Сухбатро бастан' : '🔴 Закрыть чат', `close_chat_${ctx.from.id}`)],
+      [Markup.button.callback(lang === 'tj' ? '🏠 Менюи асосӣ' : '🏠 Главное меню', 'main_menu')]
+    ])
 
     if (step === 'waiting_support_msg') {
       return ctx.replyWithHTML(
-        lang === 'tj' ? '✅ Хабар қабул шуд! Admin зуд ҷавоб медиҳад.' : '✅ Сообщение принято! Admin скоро ответит.',
-        Markup.inlineKeyboard([[Markup.button.callback(lang === 'tj' ? '🔴 Сухбатро бастан' : '🔴 Закрыть чат', `close_chat_${ctx.from.id}`)]])
+        lang === 'tj'
+          ? `✅ <b>Хабар қабул шуд!</b>\nAdmin зуд ҷавоб медиҳад.\n\n📝 Давом навишта метавонед...`
+          : `✅ <b>Сообщение принято!</b>\nAdmin скоро ответит.\n\n📝 Можете продолжать писать...`,
+        userKb
       )
     }
     return
@@ -225,7 +230,7 @@ bot.on('text', async (ctx) => {
   if (step === 'waiting_admin_pass') {
     ctx.session.admin_attempts = (ctx.session.admin_attempts || 0) + 1
     if (text === ADMIN_PASSWORD) {
-      ctx.session.step = null
+      ctx.session.step = 'admin_panel_open'
       ctx.session.admin_attempts = 0
       return showAdminPanel(ctx)
     }
@@ -233,9 +238,13 @@ bot.on('text', async (ctx) => {
     if (left <= 0) {
       ctx.session.step = null
       ctx.session.admin_attempts = 0
-      return ctx.replyWithHTML('🔒 <b>3 маротиба хато! Панел баста шуд.</b>')
+      return ctx.replyWithHTML(
+        '🔒 <b>3 маротиба хато кирилди!</b>\nПанел муваqqат баста шуд.\n\nДубора уриниш учун /admin_panel'
+      )
     }
-    return ctx.replyWithHTML(`❌ Рамз нодуруст! Боқӣ: <b>${left}</b> кӯшиш`)
+    return ctx.replyWithHTML(
+      `❌ <b>Рамз нодуруст!</b>\nБоқӣ: <b>${left}</b> кӯшиш\n\nДубора уриниб кўринг:`
+    )
   }
 })
 
