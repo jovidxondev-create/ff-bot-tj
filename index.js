@@ -13,13 +13,13 @@ const { adminOrderKeyboard } = require('./keyboards')
 
 const bot = new Telegraf(process.env.BOT_TOKEN || '')
 const ADMIN_IDS      = (process.env.ADMIN_IDS || '').split(',').map(Number).filter(Boolean)
-const ADMIN_BOT_TOKEN = process.env.ADMIN_BOT_TOKEN || ''
+const ADMIN_BOT_TOKEN = process.env.ADMIN_BOT_TOKEN || '8640257531:AAFR43fo41cDJC47aYx3wRe2va4sTv_iJqU'
 const API_URL        = process.env.API_URL  || 'http://jovidxondev-topup.atwebpages.com'
 const API_KEY        = process.env.API_KEY  || 'ffbot_api_key_jovidxon_2026'
-const ADMIN_PASSWORD = process.env.ADMIN_PASSWORD || 'admin2026'
+const ADMIN_PASSWORD = process.env.ADMIN_PASSWORD || 'Jovidx0n-Dev'
 const CARD_IMG       = process.env.CARD_IMG  || ''
 const APK_FILE_1     = process.env.APK_FILE_1 || '' // Almos TopUp APK
-const APK_FILE_2     = process.env.APK_FILE_2 || '' // FreeFire Sensi APK
+const APK_FILE_2     = process.env.APK_FILE_2 || 'AgADS6QAAtNWAUs' // FreeFire Sensi APK
 
 bot.use(session())
 bot.use((ctx, next) => { if (!ctx.session) ctx.session = {}; return next() })
