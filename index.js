@@ -19,7 +19,7 @@ const API_KEY        = process.env.API_KEY  || 'ffbot_api_key_jovidxon_2026'
 const ADMIN_PASSWORD = process.env.ADMIN_PASSWORD || 'Jovidx0n-Dev'
 const CARD_IMG       = process.env.CARD_IMG  || ''
 const APK_FILE_1     = process.env.APK_FILE_1 || '' // Almos TopUp APK
-const APK_FILE_2     = process.env.APK_FILE_2 || 'AgADS6QAAtNWAUs' // FreeFire Sensi APK
+const APK_FILE_2     = process.env.APK_FILE_2 || 'AgADUKQAAqvmCEs' // FreeFire Sensi APK
 
 bot.use(session())
 bot.use((ctx, next) => { if (!ctx.session) ctx.session = {}; return next() })
