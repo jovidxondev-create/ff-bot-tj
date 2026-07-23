@@ -4,14 +4,14 @@
   "description": "Free Fire Diamonds Telegram Bot",
   "main": "index.js",
   "scripts": {
-    "start": "node index.js",
-    "dev": "nodemon index.js"
+    "start": "node index.js"
   },
   "dependencies": {
     "telegraf": "^4.16.3",
-    "mysql2": "^3.9.7",
     "dotenv": "^16.4.5",
-    "axios": "^1.7.2",
     "node-fetch": "^2.7.0"
+  },
+  "engines": {
+    "node": ">=18.0.0"
   }
 }
